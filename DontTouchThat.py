@@ -45,15 +45,13 @@ class Player:
     def movePlayer(self):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
-                if event.type == pygame.K_LEFT:
-                    xChange = -playerSize
-                elif event.type == pygame.K_RIGHT:
-                    xChange = playerSize
+                if event.key == pygame.K_LEFT:
+                    self.xChange = -self.playerSize
+                elif event.key == pygame.K_RIGHT:
+                    self.xChange = self.playerSize
 
-                    if self.xPosition < 0 or self.xPosition > display_width:
-                        self.xPosition += 0
-                    else:
-                        self.xPosition += self.xChange
+        pygame.draw.rect(gameScreen, self.playerColor, [self.xPosition, self.yPosition, self.playerSize, self.playerSize])
+
 
 
 
@@ -121,6 +119,7 @@ clock = pygame.time.Clock()
 fallingStars = []
 
 
+clockTickTimer = 0
 
 
 
@@ -141,7 +140,8 @@ while starFall:
 
 
     # refresh rate of gameScreen (times per second)
-    clock.tick(60)
+    clock.tick(30)
+
 
 
 
@@ -152,12 +152,37 @@ while starFall:
             starFall = False
             sys.exit()
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                xChange = -10
-            if event.key == pygame.K_RIGHT:
-                xChange = 10
 
+
+        if xPosition <= 0:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    xChange = 0
+                if event.key == pygame.K_RIGHT:
+                    xChange = 10
+        if xPosition >= display_width - 40:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    xChange = -10
+                if event.key == pygame.K_RIGHT:
+                    xChange = 0
+        if xPosition > 0 and xPosition < display_width - 40:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    xChange = -10
+                if event.key == pygame.K_RIGHT:
+                    xChange = 10
+
+
+        #if event.type == pygame.KEYDOWN and (xPosition > 0 and xPosition < display_width - 40):
+        #    if event.key == pygame.K_LEFT and xPosition > 0:
+        #        xChange = -10
+        #    elif event.key == pygame.K_LEFT and xPosition < 30:
+        #        xChange = 0
+        #    elif event.key == pygame.K_RIGHT and xPosition < display_width - 30:
+        #        xChange = 10
+        #    elif event.key == pygame.K_RIGHT and xPosition > display_width - 40:
+        #        xChange = 0
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -168,20 +193,26 @@ while starFall:
     gameScreen.fill(darkGray)
 
 
+    #print(clock.tick())
 
-
+    clockTickTimer += 1
+    #print (clock.get_fps())
 
     xPosition += xChange
+    print(xPosition)
 
 
+    Player(30, xPosition, xChange, display_height - 50, pink).movePlayer()
 
 
     # keep making the stars...
-    if makeStars:
-        # stars going down
-        fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+    if makeStars and clockTickTimer > 20:
 
-        pygame.draw.rect(gameScreen, pink, [xPosition, 600, 40, 40])
+        # stars going down
+        fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 2), random.randrange(-1, 2)/2))
+
+        clockTickTimer = 0
+
 
 
 
