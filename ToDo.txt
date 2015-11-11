@@ -6,4 +6,12 @@
   - How?
   - Center it..
 # Some kind of start screen
+# Colors:
+  - Single color for Player
+  - Single color for falling stuff
 # Make it modular (put the classes in separate files)
+# Screenshots
+# Clean up code
+  - remove unnecessary code
+  - clean-up comments
+  - make it classy
