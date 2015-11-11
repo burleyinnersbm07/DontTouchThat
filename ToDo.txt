@@ -1,7 +1,9 @@
 # Place all movement code in the 'Player' class
   - This might remove the movement glitches...
+# Collision detection
 # Timer?
 # Score tally
   - How?
   - Center it..
 # Some kind of start screen
+# Make it modular (put the classes in separate files)
