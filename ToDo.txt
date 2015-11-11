@@ -9,6 +9,7 @@
 # Colors:
   - Single color for Player
   - Single color for falling stuff
+  - Class for the color list?
 # Make it modular (put the classes in separate files)
 # Screenshots
 # Clean up code
