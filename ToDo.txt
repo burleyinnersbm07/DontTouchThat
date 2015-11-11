@@ -16,3 +16,4 @@
   - remove unnecessary code
   - clean-up comments
   - make it classy
+  - Add the if __name__ == "__main__": thing... It's the main method
