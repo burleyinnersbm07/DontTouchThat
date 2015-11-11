@@ -1,0 +1,7 @@
+# Place all movement code in the 'Player' class
+  - This might remove the movement glitches...
+# Timer?
+# Score tally
+  - How?
+  - Center it..
+# Some kind of start screen
