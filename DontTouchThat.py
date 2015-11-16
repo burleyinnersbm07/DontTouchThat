@@ -111,7 +111,7 @@ colorList.append(rLightGray)
 colorList.append(rrLightGray)
 colorList.append(lightBlue)
 
-# Clock and FPS stuff
+# Game clock
 clock = pygame.time.Clock()
 
 # List to maintain star objects
@@ -119,7 +119,7 @@ fallingStars = []
 
 clockTickTimer = 0
 
-# variables for the while loop... 1's and 0's work too
+# Booleans for the game loop(s)
 RUNNING = True
 makeStars = True
 
@@ -132,7 +132,7 @@ pygame.key.set_repeat(1, 5)
 player = Player(30, xPosition, display_height - 50, pink, display_width)
 
 
-# Main loop for the falling star effect
+# Main loop to run the game
 while RUNNING:
 
     # refresh rate of gameScreen (times per second)
@@ -154,14 +154,7 @@ while RUNNING:
                 xChange += 10
                 #print("right")
 
-        #if pygame.key.get_pressed()[pygame.K_LEFT]:
-        #    xChange = -10
-        #    print("left pressed")
-        #elif pygame.key.get_pressed()[pygame.K_RIGHT]:
-        #    xChange += 10
-        #    print("right pressed")
-
-    # background color, drawn before the stars each time
+    # background color, first thing drawn
     gameScreen.fill(darkGray)
 
     #print(clock.tick())
@@ -185,15 +178,15 @@ while RUNNING:
     #print(xPosition)
     #print(display_width)
 
-    # keep making the stars...
+    # loop to constantly generate stars
     if makeStars and clockTickTimer > 20:
 
-        # stars going down
+        # make a star
         fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 2), random.randrange(-1, 2)/2, score))
 
         clockTickTimer = 0
 
-    # for every star object in the list, run the fall function (make 'em "move")
+    # make all of the stars fall
     for i in fallingStars:
         i.fall()
         score += i.returnScore()
@@ -208,8 +201,7 @@ while RUNNING:
             del fallingStars[:]
 
 
-    # draw the screen
+    # refresh/update the screen
     pygame.display.update()
 
-#game over code
 # That's all, folks!
