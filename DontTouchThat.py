@@ -13,7 +13,7 @@ display_height = 240
 # Create a canvas to display the game on
 gameScreen = pygame.display.set_mode((display_width, display_height))
 # Title of the game Window
-pygame.display.set_caption('Falling Stars')
+pygame.display.set_caption('Avoid the Falling Stuff')
 
 # This is the player. He is a square. #sadlife
 class Player:
